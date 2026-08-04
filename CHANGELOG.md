@@ -1,4 +1,9 @@
 # Changelog
+## v1.0.0
+### Changed
+* terragrunt 1.x support: default `TG_TF_PATH` to `terraform` (terragrunt 1.x otherwise looks for OpenTofu), overridable from the workflow.
+* `plan` and `apply` now run with `-no-color` so build logs and PR comments stay readable.
+
 ## v0.9.0
 ### Changed
 * switched to $GITHUB_OUTPUT: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/

@@ -163,6 +163,8 @@ function main {
   parseInputs
   configureCLICredentials
   installTerraform
+  # terragrunt 1.x defaults to OpenTofu; this image ships terraform only
+  export TG_TF_PATH="${TG_TF_PATH:-terraform}"
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
 
   case "${tfSubcommand}" in

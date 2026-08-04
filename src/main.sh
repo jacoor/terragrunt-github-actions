@@ -181,9 +181,11 @@ function main {
 
   # plan and apply run uncolored, unless the caller already asked for that
   tfNoColor="-no-color"
-  if [[ "${*}" == *-no-color* ]]; then
-    tfNoColor=""
-  fi
+  for arg in ${*}; do
+    if [[ "${arg}" == "-no-color" ]]; then
+      tfNoColor=""
+    fi
+  done
 
   case "${tfSubcommand}" in
     fmt)

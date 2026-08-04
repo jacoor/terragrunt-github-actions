@@ -3,7 +3,7 @@
 function terragruntApply {
   # Gather the output of `terragrunt apply`.
   echo "apply: info: applying Terragrunt configuration in ${tfWorkingDir}"
-  applyOutput=$(${tfBinary} apply -auto-approve -input=false -no-color ${*} 2>&1)
+  applyOutput=$(${tfBinary} apply -auto-approve -input=false ${tfNoColor} ${*} 2>&1)
   applyExitCode=${?}
   applyCommentStatus="Failed"
 

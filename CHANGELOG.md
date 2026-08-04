@@ -1,4 +1,9 @@
 # Changelog
+## v1.0.1
+### Fixed
+* `TG_TF_PATH` / `TG_SOURCE` / `TG_PARALLELISM` are quoted on export, and the `terraform` default now lives only in `action.yml`.
+* `-no-color` is skipped when the caller already passes it in `args`.
+
 ## v1.0.0
 ### Added
 * `tg_actions_tf_path` input (`TG_TF_PATH`, default `terraform`) — terragrunt 1.x looks for OpenTofu without it.

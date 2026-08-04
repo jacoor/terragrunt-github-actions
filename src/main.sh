@@ -76,14 +76,16 @@ function parseInputs {
 
   # terragrunt 1.x reads these from the environment; terragrunt 1.x also looks
   # for OpenTofu unless TG_TF_PATH points it at the terraform binary installed here.
-  export TG_TF_PATH="${INPUT_TG_ACTIONS_TF_PATH:-terraform}"
+  if [[ -n "${INPUT_TG_ACTIONS_TF_PATH}" ]]; then
+    export TG_TF_PATH="${INPUT_TG_ACTIONS_TF_PATH}"
+  fi
 
   if [[ -n "${INPUT_TG_ACTIONS_SOURCE}" ]]; then
-    export TG_SOURCE=${INPUT_TG_ACTIONS_SOURCE}
+    export TG_SOURCE="${INPUT_TG_ACTIONS_SOURCE}"
   fi
 
   if [[ -n "${INPUT_TG_ACTIONS_PARALLELISM}" ]]; then
-    export TG_PARALLELISM=${INPUT_TG_ACTIONS_PARALLELISM}
+    export TG_PARALLELISM="${INPUT_TG_ACTIONS_PARALLELISM}"
   fi
 }
 
@@ -176,6 +178,14 @@ function main {
   configureCLICredentials
   installTerraform
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
+
+  # plan and apply run uncolored, unless the caller already asked for that
+  tfNoColor="-no-color"
+  for arg in ${*}; do
+    if [[ "${arg}" == "-no-color" ]]; then
+      tfNoColor=""
+    fi
+  done
 
   case "${tfSubcommand}" in
     fmt)

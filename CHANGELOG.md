@@ -1,7 +1,11 @@
 # Changelog
 ## v1.0.0
+### Added
+* `tg_actions_tf_path` input (`TG_TF_PATH`, default `terraform`) — terragrunt 1.x looks for OpenTofu without it.
+* `tg_actions_source` input (`TG_SOURCE`) — replaces the removed `--terragrunt-source` flag.
+* `tg_actions_parallelism` input (`TG_PARALLELISM`).
+
 ### Changed
-* terragrunt 1.x support: default `TG_TF_PATH` to `terraform` (terragrunt 1.x otherwise looks for OpenTofu), overridable from the workflow.
 * `plan` and `apply` now run with `-no-color` so build logs and PR comments stay readable.
 
 ## v0.9.0

@@ -73,6 +73,18 @@ function parseInputs {
   if [ -n "${TF_WORKSPACE}" ]; then
     tfWorkspace="${TF_WORKSPACE}"
   fi
+
+  # terragrunt 1.x reads these from the environment; terragrunt 1.x also looks
+  # for OpenTofu unless TG_TF_PATH points it at the terraform binary installed here.
+  export TG_TF_PATH="${INPUT_TG_ACTIONS_TF_PATH:-terraform}"
+
+  if [[ -n "${INPUT_TG_ACTIONS_SOURCE}" ]]; then
+    export TG_SOURCE=${INPUT_TG_ACTIONS_SOURCE}
+  fi
+
+  if [[ -n "${INPUT_TG_ACTIONS_PARALLELISM}" ]]; then
+    export TG_PARALLELISM=${INPUT_TG_ACTIONS_PARALLELISM}
+  fi
 }
 
 function configureCLICredentials {
@@ -163,8 +175,6 @@ function main {
   parseInputs
   configureCLICredentials
   installTerraform
-  # terragrunt 1.x defaults to OpenTofu; this image ships terraform only
-  export TG_TF_PATH="${TG_TF_PATH:-terraform}"
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
 
   case "${tfSubcommand}" in

@@ -90,6 +90,9 @@ Inputs configure Terraform GitHub Actions to perform different actions.
 | tf_actions_comment                  | Whether or not to comment on GitHub pull requests. Defaults to `true`. | `No` |
 | tf_actions_working_dir              | The working directory to change into before executing Terragrunt subcommands. Defaults to the root of the GitHub repository. | `No` |
 | tf_actions_fmt_write                | Whether or not to write `fmt` changes to source files. Defaults to `false`. | `No` |
+| tg_actions_tf_path                  | Binary Terragrunt runs, exported as `TG_TF_PATH`. Defaults to `terraform`; Terragrunt 1.x looks for OpenTofu without it. | `No` |
+| tg_actions_source                   | Module source Terragrunt uses instead of the one configured in `terragrunt.hcl`, exported as `TG_SOURCE`. Replaces the removed `--terragrunt-source` flag. | `No` |
+| tg_actions_parallelism              | How many units Terragrunt runs concurrently, exported as `TG_PARALLELISM`. | `No` |
 
 ## Outputs
 
